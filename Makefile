@@ -1,3 +1,3 @@
 all:
-	gcc -o ardcu main.c
+	gcc -o build/ardcu main.c
 
