@@ -5,6 +5,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(int argc, char** argv) {
     if (argc != 4) {
@@ -19,10 +20,11 @@ int main(int argc, char** argv) {
     char* compileCommand;
     char* uploadCommand;
 
-    if (0 > asprintf(&compileCommand, "arduino-cli compile -b arduino:avr:%s %s\n", directory, fqbn)) return 2;
+    if (0 > asprintf(&compileCommand, "arduino-cli compile %s -b arduino:avr:%s\n", directory, fqbn)) return 2;
     if (0 > asprintf(&uploadCommand, "arduino-cli upload %s -b arduino:avr:%s -p /dev/%s", directory, fqbn, port)) return 2;
 
-    printf("Success\n");
+    system(compileCommand);
+    system(uploadCommand);
 
     return 0;
 }
